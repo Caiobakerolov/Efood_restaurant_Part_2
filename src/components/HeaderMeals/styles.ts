@@ -89,4 +89,5 @@ export const BackgroundImage = styled.div`
 export const StyledIcon = styled(FontAwesomeIcon)`
   margin-left: 8px;
   padding-top: 30px;
+  cursor: pointer;
 `
