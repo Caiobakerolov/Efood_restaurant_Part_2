@@ -36,7 +36,7 @@ const Product = ({ image, title, description, infos, assessment }: Props) => (
         </Assessment>
       </Information>
       <Description>{description}</Description>
-      <Button type="link" to="/meals" title="Know more">
+      <Button type="link" to="/Meals" title="Know more">
         Know more
       </Button>
     </Card>

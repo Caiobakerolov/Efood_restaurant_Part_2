@@ -16,7 +16,7 @@ const ProductMeals = ({ image, title, description }: Props) => {
         <Description>{description}</Description>
         <Button
           type="link"
-          to="/DetailsProduct"
+          to="/Product"
           title="Add to Cart"
           variant="fullWidth"
         >
