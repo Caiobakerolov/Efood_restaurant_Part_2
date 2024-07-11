@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components'
-import pasta from '../../assets/images/pasta.png'
 import { colors } from '../../styles'
 
-export const HeaderMeal = styled.header`
+export const HeroContainer = styled.header`
   background-image: url(https://efood-alpha-nine.vercel.app/static/media/fundoHero.784e90d06596c838a246.png);
 
   img {
@@ -32,57 +31,56 @@ export const BackgroundImage = styled.div`
   width: 100%;
   height: 280px;
   margin-top: 64px;
+`
 
-  .image-wrapper {
+export const ImageWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+
+  &::after {
     position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
-    height: 280px;
-    background-image: url(${pasta});
-    background-size: cover;
-    background-position: center;
+    height: 100%;
+    content: '';
+  }
+`
 
-    &::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
+export const Description = styled.div`
+  position: relative;
+  color: ${colors.white};
+  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 25px;
+  gap: 128px;
+  margin-left: 380px;
+
+  p {
+    font-size: 32px;
+    font-weight: 100;
+    line-height: 38px;
+    width: 101px;
+    height: 33.25px;
+    top: 187px;
+    left: 170px;
+    gap: 0px;
+    opacity: 0px;
   }
 
-  .description {
-    position: relative;
-    color: ${colors.white};
+  h3 {
     font-size: 32px;
-    display: flex;
-    flex-direction: column;
-    padding-top: 25px;
-    gap: 128px;
-    margin-left: 380px;
-
-    p {
-      font-size: 32px;
-      font-weight: 100;
-      line-height: 38px;
-      width: 101px;
-      height: 33.25px;
-      top: 187px;
-      left: 170px;
-      gap: 0px;
-      opacity: 0px;
-    }
-
-    h3 {
-      font-size: 32px;
-      font-weight: 900;
-      line-height: 38px;
-      width: 676px;
-      height: 33.25px;
-      top: 376.75px;
-      left: 170px;
-      gap: 0px;
-      opacity: 0px;
-    }
+    font-weight: 900;
+    line-height: 38px;
+    width: 676px;
+    height: 33.25px;
+    top: 376.75px;
+    left: 170px;
+    gap: 0px;
+    opacity: 0px;
   }
 `
 
