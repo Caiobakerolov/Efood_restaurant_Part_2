@@ -21,3 +21,14 @@ export const List = styled.ul`
     height: 167px;
   }
 `
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  div > img {
+    width: 880px;
+    height: 500px;
+  }
+`
