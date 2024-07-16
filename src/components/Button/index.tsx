@@ -1,22 +1,27 @@
+import React from 'react'
 import { ButtonContainer, ButtonLink } from './styles'
 
 type Props = {
   type: 'button' | 'link'
   title: string
   to?: string
-  onClick?: () => void
+  onClick?: (
+    e:
+      | React.MouseEvent<HTMLAnchorElement, MouseEvent>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void
   children: string
   variant?: 'default' | 'fullWidth'
 }
 
-const Button = ({
+const Button: React.FC<Props> = ({
   type,
   title,
-  to,
+  to = '#',
   onClick,
   children,
   variant = 'default'
-}: Props) => {
+}) => {
   if (type === 'button') {
     return (
       <ButtonContainer
@@ -31,11 +36,9 @@ const Button = ({
   }
 
   return (
-    <>
-      <ButtonLink to={to as string} title={title} variant={variant}>
-        {children}
-      </ButtonLink>
-    </>
+    <ButtonLink to={to} title={title} variant={variant} onClick={onClick}>
+      {children}
+    </ButtonLink>
   )
 }
 

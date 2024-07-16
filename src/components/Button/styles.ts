@@ -31,5 +31,6 @@ export const ButtonLink = styled(Link)<{ variant: string }>`
   padding: 4px 6px;
   text-decoration: none;
   text-align: center;
-  text-align: center;
+  display: inline-block;
+  cursor: pointer;
 `

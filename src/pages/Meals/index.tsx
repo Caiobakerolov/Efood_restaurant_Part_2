@@ -52,6 +52,7 @@ const Meals = () => (
   <>
     <HeaderMeals />
     <ProductsListMeals dishes={meals} />
+    {/* <Route path="/ProductDetails" element={<ProductDetails />} /> */}
   </>
 )
 
