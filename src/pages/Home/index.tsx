@@ -1,71 +1,42 @@
+import { useEffect, useState } from 'react'
 import ProductsList from '../../components/ProductsList'
-import Dish from '../../models/Dish'
 import Header from '../../components/Header'
-import sushi from '../../assets/images/sushi.png'
-import pasta from '../../assets/images/pasta.png'
 
-const meals: Dish[] = [
-  {
-    id: 1,
-    image: sushi,
-    infos: ['highlight of the week', 'Japanese'],
-    title: 'Hioki Sushi',
-    assessment: '4.9',
-    description:
-      'Order now the best of Japanese cuisine in the comfort of your home! Fresh sushi, delicious sashimi, and irresistible hot dishes. Fast delivery, careful packaging, and guaranteed quality. Experience Japan without leaving your home with our delivery service!'
-  },
-  {
-    id: 2,
-    image: pasta,
-    infos: ['Italiana'],
-    title: 'La Dolce Vita Trattoria',
-    assessment: '4.9',
-    description:
-      'Order now the best of Japanese cuisine in the comfort of your home! Fresh sushi, delicious sashimi, and irresistible hot dishes. Fast delivery, careful packaging, and guaranteed quality. Experience Japan without leaving your home with our delivery service!'
-  },
-  {
-    id: 3,
-    image: pasta,
-    infos: ['Italiana'],
-    title: 'La Dolce Vita Trattoria',
-    assessment: '4.9',
-    description:
-      'Order now the best of Japanese cuisine in the comfort of your home! Fresh sushi, delicious sashimi, and irresistible hot dishes. Fast delivery, careful packaging, and guaranteed quality. Experience Japan without leaving your home with our delivery service!'
-  },
-  {
-    id: 4,
-    image: pasta,
-    infos: ['Italiana'],
-    title: 'La Dolce Vita Trattoria',
-    assessment: '4.9',
-    description:
-      'Order now the best of Japanese cuisine in the comfort of your home! Fresh sushi, delicious sashimi, and irresistible hot dishes. Fast delivery, careful packaging, and guaranteed quality. Experience Japan without leaving your home with our delivery service!'
-  },
-  {
-    id: 5,
-    image: pasta,
-    infos: ['Italiana'],
-    title: 'La Dolce Vita Trattoria',
-    assessment: '4.9',
-    description:
-      'Order now the best of Japanese cuisine in the comfort of your home! Fresh sushi, delicious sashimi, and irresistible hot dishes. Fast delivery, careful packaging, and guaranteed quality. Experience Japan without leaving your home with our delivery service!'
-  },
-  {
-    id: 6,
-    image: pasta,
-    infos: ['Italiana'],
-    title: 'La Dolce Vita Trattoria',
-    assessment: '4.9',
-    description:
-      'Order now the best of Japanese cuisine in the comfort of your home! Fresh sushi, delicious sashimi, and irresistible hot dishes. Fast delivery, careful packaging, and guaranteed quality. Experience Japan without leaving your home with our delivery service!'
-  }
-]
+export interface ItemMenu {
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
+  preco: number
+  foto: string
+}
 
-const Home = () => (
-  <>
-    <Header />
-    <ProductsList dishes={meals} />
-  </>
-)
+export interface Restaurant {
+  id: number
+  titulo: string
+  destacado: boolean
+  tipo: string
+  avaliacao: number
+  descricao: string
+  capa: string
+  cardapio: ItemMenu[]
+}
+
+const Home = () => {
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((res) => setRestaurants(res))
+  }, [])
+
+  return (
+    <>
+      <Header />
+      <ProductsList dishes={restaurants} />
+    </>
+  )
+}
 
 export default Home

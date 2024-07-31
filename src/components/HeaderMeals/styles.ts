@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 
 export const HeroContainer = styled.header`
-  background-image: url(https://efood-alpha-nine.vercel.app/static/media/fundoHero.784e90d06596c838a246.png);
-
   img {
     width: 125px;
     height: 57px;
@@ -65,10 +63,6 @@ export const Description = styled.div`
     line-height: 38px;
     width: 101px;
     height: 33.25px;
-    top: 187px;
-    left: 170px;
-    gap: 0px;
-    opacity: 0px;
   }
 
   h3 {
@@ -77,10 +71,6 @@ export const Description = styled.div`
     line-height: 38px;
     width: 676px;
     height: 33.25px;
-    top: 376.75px;
-    left: 170px;
-    gap: 0px;
-    opacity: 0px;
   }
 `
 

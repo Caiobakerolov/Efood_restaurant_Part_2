@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
-
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-
 import {
   HeroContainer,
   Container,
@@ -10,11 +8,15 @@ import {
   Description,
   ImageWrapper
 } from './styles'
-
 import logo from '../../assets/images/logo.svg'
-import pasta from '../../assets/images/pasta.png'
 
-const Hero = () => {
+type HeaderMealsProps = {
+  backgroundImage: string
+  title: string
+  type: string
+}
+
+const HeaderMeals = ({ backgroundImage, title, type }: HeaderMealsProps) => {
   return (
     <>
       <HeroContainer>
@@ -29,10 +31,12 @@ const Hero = () => {
           </p>
         </Container>
         <BackgroundImage>
-          <ImageWrapper style={{ backgroundImage: `url(${pasta})` }} />
+          <ImageWrapper
+            style={{ backgroundImage: `url(${backgroundImage})` }}
+          />
           <Description>
-            <p>Italiana</p>
-            <h3>La Dolce Vita Trattoria</h3>
+            <p>{type}</p>
+            <h3>{title}</h3>
           </Description>
         </BackgroundImage>
       </HeroContainer>
@@ -40,4 +44,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default HeaderMeals

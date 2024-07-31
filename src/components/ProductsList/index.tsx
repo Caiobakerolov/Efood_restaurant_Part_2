@@ -1,9 +1,10 @@
+import React from 'react'
 import Product from '../Product'
-import Dish from '../../models/Dish'
+import { Restaurant } from '../../pages/Home'
 import { Container, List } from './styles'
 
 export type Props = {
-  dishes: Dish[]
+  dishes: Restaurant[]
 }
 
 const ProductsList = ({ dishes }: Props) => (
@@ -14,11 +15,11 @@ const ProductsList = ({ dishes }: Props) => (
           {dishes.map((dish) => (
             <Product
               key={dish.id}
-              image={dish.image}
-              infos={dish.infos}
-              assessment={dish.assessment}
-              title={dish.title}
-              description={dish.description}
+              image={dish.capa}
+              infos={[dish.tipo]}
+              assessment={dish.avaliacao.toString()}
+              title={dish.titulo}
+              description={dish.descricao}
             />
           ))}
         </List>

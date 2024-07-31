@@ -1,59 +1,42 @@
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import ProductsListMeals from '../../components/ProductsListMeals'
-import DishPizza from '../../models/DishPizza'
 import HeaderMeals from '../../components/HeaderMeals'
-import pizza from '../../assets/images/pizza.png'
+import { Restaurant } from '../Home'
 
-const meals: DishPizza[] = [
-  {
-    id: 1,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    description:
-      'The classic Margherita: juicy tomato sauce, melted mozzarella, fresh basil and a touch of olive oil. Flavor and simplicity!'
-  },
-  {
-    id: 2,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    description:
-      'The classic Margherita: juicy tomato sauce, melted mozzarella, fresh basil and a touch of olive oil. Flavor and simplicity!'
-  },
-  {
-    id: 3,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    description:
-      'The classic Margherita: juicy tomato sauce, melted mozzarella, fresh basil and a touch of olive oil. Flavor and simplicity!'
-  },
-  {
-    id: 4,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    description:
-      'The classic Margherita: juicy tomato sauce, melted mozzarella, fresh basil and a touch of olive oil. Flavor and simplicity!'
-  },
-  {
-    id: 5,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    description:
-      'The classic Margherita: juicy tomato sauce, melted mozzarella, fresh basil and a touch of olive oil. Flavor and simplicity!'
-  },
-  {
-    id: 6,
-    image: pizza,
-    title: 'Pizza Marguerita',
-    description:
-      'The classic Margherita: juicy tomato sauce, melted mozzarella, fresh basil and a touch of olive oil. Flavor and simplicity!'
-  }
-]
+const Meals = () => {
+  const [restaurant, setRestaurant] = useState<Restaurant | null>(null)
+  const { titulo } = useParams<{ titulo: string }>()
 
-const Meals = () => (
-  <>
-    <HeaderMeals />
-    <ProductsListMeals dishes={meals} />
-    {/* <Route path="/ProductDetails" element={<ProductDetails />} /> */}
-  </>
-)
+  useEffect(() => {
+    console.log('Fetching data for restaurant:', titulo)
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((res) => {
+        const selectedRestaurant = res.find(
+          (rest: Restaurant) => rest.titulo === titulo
+        )
+        console.log('Selected restaurant:', selectedRestaurant)
+        setRestaurant(selectedRestaurant)
+      })
+  }, [titulo])
+
+  return (
+    <>
+      {restaurant && (
+        <HeaderMeals
+          backgroundImage={restaurant.capa}
+          title={restaurant.titulo}
+          type={restaurant.tipo}
+        />
+      )}
+      {restaurant ? (
+        <ProductsListMeals dishes={restaurant.cardapio} />
+      ) : (
+        <p>Loading...</p>
+      )}
+    </>
+  )
+}
 
 export default Meals

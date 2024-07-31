@@ -5,7 +5,7 @@ export const HeaderBar = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 2032px;
+  width: 100%;
   height: 384px;
 
   img {
