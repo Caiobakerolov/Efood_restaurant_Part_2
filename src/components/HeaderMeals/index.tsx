@@ -26,7 +26,7 @@ const HeaderMeals = ({ backgroundImage, title, type }: HeaderMealsProps) => {
             <img src={logo} alt="Efood" />
           </Link>
           <p>
-            0 - Product in cart
+            0 - Produtos no carrinho
             <StyledIcon icon={faShoppingCart} />
           </p>
         </Container>

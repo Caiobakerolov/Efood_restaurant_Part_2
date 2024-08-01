@@ -43,7 +43,7 @@ const ProductMeals: React.FC<Props> = ({
         variant="fullWidth"
         onClick={handleClick}
       >
-        Add to Cart
+        Adicionar ao Carrinho
       </Button>
     </Card>
   )

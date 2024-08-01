@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 
 export const HeroContainer = styled.header`
+  background-image: url(https://efood-alpha-nine.vercel.app/static/media/fundoHero.784e90d06596c838a246.png);
   img {
     width: 125px;
     height: 57px;

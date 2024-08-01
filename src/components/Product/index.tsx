@@ -24,6 +24,13 @@ const Product = ({ image, title, description, infos, assessment }: Props) => {
     console.log(`Navigating to /meals/${title}`)
   }
 
+  const getDescription = (description: string) => {
+    if (description.length > 95) {
+      return description.slice(0, 250) + '...'
+    }
+    return description
+  }
+
   return (
     <>
       <Card>
@@ -40,7 +47,7 @@ const Product = ({ image, title, description, infos, assessment }: Props) => {
             <FontAwesomeIcon icon={faStar} color="#FFB930" />
           </Assessment>
         </Information>
-        <Description>{description}</Description>
+        <Description>{getDescription(description)}</Description>
         <Button
           type="link"
           title="Know more"
@@ -48,7 +55,7 @@ const Product = ({ image, title, description, infos, assessment }: Props) => {
           onClick={handleClick}
           variant="default"
         >
-          Know more
+          Saiba Mais
         </Button>
       </Card>
     </>

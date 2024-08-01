@@ -32,6 +32,13 @@ const ProductsListMeals: React.FC<Props> = ({ dishes }) => {
     setSelectedDish(null)
   }
 
+  const getDescription = (description: string) => {
+    if (description.length > 95) {
+      return description.slice(0, 92) + '...'
+    }
+    return description
+  }
+
   return (
     <>
       <Container>
@@ -42,7 +49,7 @@ const ProductsListMeals: React.FC<Props> = ({ dishes }) => {
                 key={dish.id}
                 image={dish.foto}
                 title={dish.nome}
-                description={dish.descricao}
+                description={getDescription(dish.descricao)}
                 onClick={() => openModal(dish)}
               />
             ))}
@@ -63,10 +70,10 @@ const ProductsListMeals: React.FC<Props> = ({ dishes }) => {
                 <Button
                   type="link"
                   to="#"
-                  title="Add to Cart"
+                  title="Adicionar ao Carrinho"
                   variant="fullWidth"
                 >
-                  {`Add to Cart - U$ ${selectedDish.preco}`}
+                  {`Adicionar ao Carrinho - R$ ${selectedDish.preco}`}
                 </Button>
               </div>
             </Card>
