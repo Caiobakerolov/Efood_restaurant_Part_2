@@ -66,6 +66,27 @@ export const Card = styled.div`
   div {
     margin-top: 32px;
   }
+
+  p {
+    color: ${colors.creamWhite};
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+`
+
+export const StyledButton = styled.button`
+  background-color: ${colors.creamWhite};
+  color: ${colors.orangeRed};
+  font-size: 14px;
+  font-weight: 700;
+  width: auto;
+  height: 24px;
+  padding: 4px 6px;
+  margin-top: 20px;
+  white-space: nowrap;
+  text-align: center;
+  border: none;
+  cursor: pointer;
 `
 
 export const StyledCloseButton = styled.button`
@@ -88,6 +109,7 @@ export const Title = styled.h3`
   font-weight: 900;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 16px;
 `
 
 export const Description = styled.p`
@@ -95,5 +117,6 @@ export const Description = styled.p`
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  margin-right: 32px;
 `

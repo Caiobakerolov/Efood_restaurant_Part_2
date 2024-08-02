@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+
+import { ItemMenu } from '../../pages/Home'
 import ProductMeals from '../ProductMeals'
-import Button from '../Button'
+
 import {
   Card,
   Container,
@@ -8,10 +10,11 @@ import {
   List,
   Modal,
   ModalContent,
+  StyledButton,
   StyledCloseButton,
   Title
 } from './styles'
-import { ItemMenu } from '../../pages/Home'
+
 import close from '../../assets/images/close.png'
 
 export type Props = {
@@ -67,14 +70,10 @@ const ProductsListMeals: React.FC<Props> = ({ dishes }) => {
               <div>
                 <Title>{selectedDish.nome}</Title>
                 <Description>{selectedDish.descricao}</Description>
-                <Button
-                  type="link"
-                  to="#"
-                  title="Adicionar ao Carrinho"
-                  variant="fullWidth"
-                >
+                <p>Serve: 2 a 3 pessoas</p>
+                <StyledButton type="button" title="Adicionar ao Carrinho">
                   {`Adicionar ao Carrinho - R$ ${selectedDish.preco}`}
-                </Button>
+                </StyledButton>
               </div>
             </Card>
           </ModalContent>
