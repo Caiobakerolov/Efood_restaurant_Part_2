@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { ItemMenu } from '../../pages/Home'
+import { ItemMenu, Restaurant } from '../../types'
 import ProductMeals from '../ProductMeals'
 
 import {
@@ -19,11 +19,30 @@ import close from '../../assets/images/close.png'
 
 export type Props = {
   dishes: ItemMenu[]
+  setRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>
+  titulo: string
 }
 
-const ProductsListMeals: React.FC<Props> = ({ dishes }) => {
+const ProductsListMeals: React.FC<Props> = ({
+  dishes,
+  setRestaurant,
+  titulo
+}) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedDish, setSelectedDish] = useState<ItemMenu | null>(null)
+
+  useEffect(() => {
+    console.log('Fetching data for restaurant:', titulo)
+    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+      .then((res) => res.json())
+      .then((res) => {
+        const selectedRestaurant = res.find(
+          (rest: Restaurant) => rest.titulo === titulo
+        )
+        console.log('Selected restaurant:', selectedRestaurant)
+        setRestaurant(selectedRestaurant)
+      })
+  }, [titulo, setRestaurant])
 
   const openModal = (dish: ItemMenu) => {
     setSelectedDish(dish)

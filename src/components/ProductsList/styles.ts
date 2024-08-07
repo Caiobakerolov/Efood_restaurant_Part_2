@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { Props } from '.'
 
-export const Container = styled.section<Omit<Props, 'dishes'>>`
+export const Container = styled.section`
   display: flex;
   margin: 0 auto;
   justify-content: center;

@@ -1,6 +1,8 @@
-import { HeaderBar } from './styles'
-import logo from '../../assets/images/logo.svg'
 import { Link } from 'react-router-dom'
+
+import { HeaderBar } from './styles'
+
+import logo from '../../assets/images/logo.svg'
 
 const Header = () => (
   <>
