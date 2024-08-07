@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import ProductMeals from '../ProductMeals'
-import { useGetFeaturedRestaurantsQuery } from '../../services/api'
-import { ItemMenu, Restaurant } from '../../pages/Home'
+
+import { Props } from './types'
+import { useRestaurants } from './hooks'
+import { getDescription } from './utils'
 
 import {
   Container,
@@ -18,42 +20,16 @@ import {
 
 import close from '../../assets/images/close.png'
 
-export type Props = {
-  setRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>
-  title: string
-}
-
 const ProductsListMeals: React.FC<Props> = ({ setRestaurant, title }) => {
   const {
-    data: restaurants,
     isLoading,
-    error
-  } = useGetFeaturedRestaurantsQuery()
-
-  const [modalOpen, setModalOpen] = useState(false)
-  const [selectedDish, setSelectedDish] = useState<ItemMenu | null>(null)
-
-  useEffect(() => {
-    if (restaurants) {
-      const selectedRestaurant = restaurants.find(
-        (rest: Restaurant) => rest.titulo === title
-      )
-      setRestaurant(selectedRestaurant || null)
-    }
-  }, [restaurants, title, setRestaurant])
-
-  const openModal = (dish: ItemMenu) => {
-    setSelectedDish(dish)
-    setModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setModalOpen(false)
-    setSelectedDish(null)
-  }
-
-  const getDescription = (description: string) =>
-    description.length > 95 ? `${description.slice(0, 92)}...` : description
+    error,
+    modalOpen,
+    selectedDish,
+    openModal,
+    closeModal,
+    dishes
+  } = useRestaurants(title, setRestaurant)
 
   if (isLoading) {
     return <p>Loading...</p>
@@ -62,10 +38,6 @@ const ProductsListMeals: React.FC<Props> = ({ setRestaurant, title }) => {
   if (error) {
     return <p>Error loading data</p>
   }
-
-  const dishes =
-    restaurants?.find((rest: Restaurant) => rest.titulo === title)?.cardapio ||
-    []
 
   return (
     <>
