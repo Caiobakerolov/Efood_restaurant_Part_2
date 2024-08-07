@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import Tag from '../Tag'
+import Button from '../Button'
+
 import {
   Card,
   Description,
@@ -9,7 +11,6 @@ import {
   Assessment,
   Information
 } from './styles'
-import Button from '../Button'
 
 type Props = {
   image: string
@@ -20,10 +21,6 @@ type Props = {
 }
 
 const Product = ({ image, title, description, infos, assessment }: Props) => {
-  const handleClick = () => {
-    console.log(`Navigating to /meals/${title}`)
-  }
-
   const getDescription = (description: string) => {
     if (description.length > 95) {
       return description.slice(0, 250) + '...'
@@ -50,9 +47,8 @@ const Product = ({ image, title, description, infos, assessment }: Props) => {
         <Description>{getDescription(description)}</Description>
         <Button
           type="link"
-          title="Know more"
+          title="Saiba Mais"
           to={`/meals/${title}`}
-          onClick={handleClick}
           variant="default"
         >
           Saiba Mais

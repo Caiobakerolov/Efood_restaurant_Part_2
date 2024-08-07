@@ -39,7 +39,7 @@ const ProductMeals: React.FC<Props> = ({
       <Button
         type="link"
         to="#"
-        title="Add to Cart"
+        title="Adicionar ao Carrinho"
         variant="fullWidth"
         onClick={handleClick}
       >

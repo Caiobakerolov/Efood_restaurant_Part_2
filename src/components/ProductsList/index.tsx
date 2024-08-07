@@ -1,21 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
 import Product from '../Product'
 import { Restaurant } from '../../pages/Home'
-import { Container, List } from './styles'
 import { useGetFeaturedRestaurantsQuery } from '../../services/api'
+
+import { Container, List } from './styles'
 
 export type Props = {
   setDishes: React.Dispatch<React.SetStateAction<Restaurant[]>>
 }
 
 const ProductsList = ({ setDishes }: Props) => {
-  const { data: dishes, isLoading, error } = useGetFeaturedRestaurantsQuery()
+  const {
+    data: restaurants,
+    isLoading,
+    error
+  } = useGetFeaturedRestaurantsQuery()
 
-  React.useEffect(() => {
-    if (dishes) {
-      setDishes(dishes)
+  useEffect(() => {
+    if (restaurants) {
+      setDishes(restaurants)
     }
-  }, [dishes, setDishes])
+  }, [restaurants, setDishes])
 
   if (isLoading) {
     return <p>Loading...</p>
@@ -29,7 +35,7 @@ const ProductsList = ({ setDishes }: Props) => {
     <Container>
       <div>
         <List>
-          {dishes?.map((dish) => (
+          {restaurants?.map((dish) => (
             <Product
               key={dish.id}
               image={dish.capa}

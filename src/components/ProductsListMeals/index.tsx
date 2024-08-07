@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import { Restaurant, ItemMenu } from '../../pages/Home'
+import React, { useState, useEffect } from 'react'
 
 import ProductMeals from '../ProductMeals'
+import { useGetFeaturedRestaurantsQuery } from '../../services/api'
+import { ItemMenu, Restaurant } from '../../pages/Home'
+
 import {
   Container,
   List,
@@ -13,8 +15,6 @@ import {
   Description,
   StyledButton
 } from './styles'
-
-import { useGetFeaturedRestaurantsQuery } from '../../services/api'
 
 import close from '../../assets/images/close.png'
 
@@ -33,7 +33,7 @@ const ProductsListMeals: React.FC<Props> = ({ setRestaurant, title }) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedDish, setSelectedDish] = useState<ItemMenu | null>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (restaurants) {
       const selectedRestaurant = restaurants.find(
         (rest: Restaurant) => rest.titulo === title

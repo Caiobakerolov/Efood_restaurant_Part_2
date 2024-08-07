@@ -24,12 +24,12 @@ export interface Restaurant {
 }
 
 const Home = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+  const [, setRestaurants] = useState<Restaurant[]>([])
 
   return (
     <>
       <Header />
-      <ProductsList dishes={restaurants} setDishes={setRestaurants} />
+      <ProductsList setDishes={setRestaurants} />
     </>
   )
 }
