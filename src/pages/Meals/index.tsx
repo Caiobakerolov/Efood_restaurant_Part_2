@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom'
 
 import ProductsListMeals from '../../components/ProductsListMeals'
 import HeaderMeals from '../../components/HeaderMeals'
-import { Restaurant } from '../../types'
+import { Restaurant } from '../../pages/Home'
 
 const Meals = () => {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null)
-  const { titulo } = useParams<{ titulo: string }>()
+  const { title } = useParams<{ title: string }>()
 
   return (
     <>
@@ -18,11 +18,7 @@ const Meals = () => {
           type={restaurant.tipo}
         />
       )}
-      <ProductsListMeals
-        dishes={restaurant ? restaurant.cardapio : []}
-        setRestaurant={setRestaurant}
-        titulo={titulo || ''}
-      />
+      <ProductsListMeals setRestaurant={setRestaurant} title={title || ''} />
     </>
   )
 }

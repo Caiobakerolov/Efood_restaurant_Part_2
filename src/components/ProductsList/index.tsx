@@ -1,27 +1,35 @@
-import React, { useEffect } from 'react'
-
+import React from 'react'
 import Product from '../Product'
-import { Restaurant } from '../../types'
-
+import { Restaurant } from '../../pages/Home'
 import { Container, List } from './styles'
+import { useGetFeaturedRestaurantsQuery } from '../../services/api'
 
 export type Props = {
-  dishes: Restaurant[]
   setDishes: React.Dispatch<React.SetStateAction<Restaurant[]>>
 }
 
-const ProductsList = ({ dishes, setDishes }: Props) => {
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setDishes(res))
-  }, [setDishes])
+const ProductsList = ({ setDishes }: Props) => {
+  const { data: dishes, isLoading, error } = useGetFeaturedRestaurantsQuery()
+
+  React.useEffect(() => {
+    if (dishes) {
+      setDishes(dishes)
+    }
+  }, [dishes, setDishes])
+
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>Error loading data</p>
+  }
 
   return (
     <Container>
       <div>
         <List>
-          {dishes.map((dish) => (
+          {dishes?.map((dish) => (
             <Product
               key={dish.id}
               image={dish.capa}

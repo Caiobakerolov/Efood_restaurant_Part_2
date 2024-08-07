@@ -1,48 +1,46 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { Restaurant, ItemMenu } from '../../pages/Home'
 
-import { ItemMenu, Restaurant } from '../../types'
 import ProductMeals from '../ProductMeals'
-
 import {
-  Card,
   Container,
-  Description,
   List,
   Modal,
   ModalContent,
-  StyledButton,
   StyledCloseButton,
-  Title
+  Card,
+  Title,
+  Description,
+  StyledButton
 } from './styles'
+
+import { useGetFeaturedRestaurantsQuery } from '../../services/api'
 
 import close from '../../assets/images/close.png'
 
 export type Props = {
-  dishes: ItemMenu[]
   setRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>
-  titulo: string
+  title: string
 }
 
-const ProductsListMeals: React.FC<Props> = ({
-  dishes,
-  setRestaurant,
-  titulo
-}) => {
+const ProductsListMeals: React.FC<Props> = ({ setRestaurant, title }) => {
+  const {
+    data: restaurants,
+    isLoading,
+    error
+  } = useGetFeaturedRestaurantsQuery()
+
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedDish, setSelectedDish] = useState<ItemMenu | null>(null)
 
-  useEffect(() => {
-    console.log('Fetching data for restaurant:', titulo)
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => {
-        const selectedRestaurant = res.find(
-          (rest: Restaurant) => rest.titulo === titulo
-        )
-        console.log('Selected restaurant:', selectedRestaurant)
-        setRestaurant(selectedRestaurant)
-      })
-  }, [titulo, setRestaurant])
+  React.useEffect(() => {
+    if (restaurants) {
+      const selectedRestaurant = restaurants.find(
+        (rest: Restaurant) => rest.titulo === title
+      )
+      setRestaurant(selectedRestaurant || null)
+    }
+  }, [restaurants, title, setRestaurant])
 
   const openModal = (dish: ItemMenu) => {
     setSelectedDish(dish)
@@ -54,29 +52,35 @@ const ProductsListMeals: React.FC<Props> = ({
     setSelectedDish(null)
   }
 
-  const getDescription = (description: string) => {
-    if (description.length > 95) {
-      return description.slice(0, 92) + '...'
-    }
-    return description
+  const getDescription = (description: string) =>
+    description.length > 95 ? `${description.slice(0, 92)}...` : description
+
+  if (isLoading) {
+    return <p>Loading...</p>
   }
+
+  if (error) {
+    return <p>Error loading data</p>
+  }
+
+  const dishes =
+    restaurants?.find((rest: Restaurant) => rest.titulo === title)?.cardapio ||
+    []
 
   return (
     <>
       <Container>
-        <div>
-          <List>
-            {dishes.map((dish) => (
-              <ProductMeals
-                key={dish.id}
-                image={dish.foto}
-                title={dish.nome}
-                description={getDescription(dish.descricao)}
-                onClick={() => openModal(dish)}
-              />
-            ))}
-          </List>
-        </div>
+        <List>
+          {dishes.map((dish) => (
+            <ProductMeals
+              key={dish.id}
+              image={dish.foto}
+              title={dish.nome}
+              description={getDescription(dish.descricao)}
+              onClick={() => openModal(dish)}
+            />
+          ))}
+        </List>
       </Container>
       {modalOpen && selectedDish && (
         <Modal className={modalOpen ? 'visible' : ''}>
